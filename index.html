@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Moore Advice Tizen Application" />
+  <title>Moore Advice Tizen Application</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    .error-message {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: red;
+      font-size: 28px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Wrapper Div -->
+  <div id="iframeContainer">
+    <iframe  width="1900px" height="1060px"
+      id="appFrame"
+      src="https://whitespaces2.app-adm.in/firestart/index.html"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-top-navigation allow-popups">
+    </iframe>
+  </div>
+
+  <script>
+    const iframe = document.getElementById('appFrame');
+
+    window.onload = () => {
+      console.log("📺 Tizen App started, loading iframe...");
+      iframe.focus();
+    };
+
+    iframe.onload = () => {
+      console.log("✅ Iframe loaded successfully.");
+      iframe.focus();
+    };
+
+    iframe.onerror = () => {
+      console.error("❌ Failed to load iframe content.");
+      document.getElementById('iframeContainer').innerHTML = `
+        <div class="error-message">
+          ⚠️ Failed to load the website. Check your network connection or privileges.
+        </div>
+      `;
+    };
+  </script>
+</body>
+</html>
